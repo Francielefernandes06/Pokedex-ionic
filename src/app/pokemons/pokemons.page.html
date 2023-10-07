@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pokemons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="pokedex">
+  <nav class="listagem">
+    <!-- Verificar se a lista de Pokémons está vazia -->
+    <div *ngIf="pokemons.length === 0" class="loading">
+      Carregando...
+    </div>
+    <!-- Exibir a lista de Pokémons se não estiver vazia -->
+    <ul *ngIf="pokemons.length > 0">
+      <li class="pokemon" *ngFor="let pokemon of pokemons" (click)="mostrarDetalhes(pokemon.id)">
+        <img [src]="pokemon.image" [alt]="pokemon.name">
+        <span>{{ pokemon.name }}</span>
+      </li>
+    </ul>
+  </nav>
+</ion-content>
