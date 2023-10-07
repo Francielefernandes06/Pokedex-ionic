@@ -49,4 +49,18 @@ export class DetailsPokePage implements OnInit {
 
     return '../../assets/img/pokemon.png';
   }
+
+  getTipoClass(tipo: string): string {
+    // Mapeamento de tipos para classes CSS
+    switch (tipo) {
+      case 'water':
+        return 'tipo-agua';
+      case 'fire':
+        return 'tipo-fogo';
+      case 'grass':
+        return 'tipo-planta';
+      default:
+        return 'tipo-eletrico';
+    }
+  }
 }
