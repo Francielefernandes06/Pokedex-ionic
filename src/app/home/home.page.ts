@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular'; // Importe o NavController
+
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
+  ngOnInit() {
+  }
+  
+  irParaTelaLogin() {
+    this.navCtrl.navigateForward('/login');
+  }
 }
