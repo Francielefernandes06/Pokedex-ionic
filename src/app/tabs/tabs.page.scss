@@ -1,0 +1,17 @@
+:host{
+  ion-tab-button{
+    --color: #fff;
+    --background: #493C8B;
+    --background-activated: #fff;
+  }
+  ion-tab-button[aria-selected="true"]{
+    --color: #fff;
+    --background: #fff;
+    --background-activated: #fff;
+  }
+  ion-tab-button[aria-selected="false"]{
+    --color: #fff;
+    --background: #fff;
+    --background-activated: #fff;
+  }
+}

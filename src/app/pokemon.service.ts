@@ -20,4 +20,14 @@ export class PokemonService {
     // Fazer uma solicitação GET para obter a lista de pokémons do backend com o cabeçalho de autenticação
     return this.http.get<any[]>(`${this.apiUrl}/pokemons?page=1&per_page=5`, { headers });
   }
+
+  obterMeusPokemons(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authToken}`
+    });
+
+
+    return this.http.get<any[]>(`${this.apiUrl}/my-favorites`, { headers });
+  }
+
 }

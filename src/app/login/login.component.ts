@@ -36,10 +36,12 @@ export class LoginComponent  implements OnInit {
           // Exemplo de armazenamento de token em localStorage:
           localStorage.setItem('token', resposta.access_token);
 
+          localStorage.setItem('user', JSON.stringify(resposta.user)); // Armazene o objeto como uma string JSON
+
           console.log(resposta);
 
           // Redirecione para a página desejada (por exemplo, a página inicial)
-          this.navCtrl.navigateRoot('/pokemons');
+          this.navCtrl.navigateRoot('/');
         } else {
           // O login falhou, exiba uma mensagem de erro para o usuário
           console.error('Login falhou. Mensagem de erro:', resposta.error);
