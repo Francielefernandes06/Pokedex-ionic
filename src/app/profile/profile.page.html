@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="profile-header">
+    <img src="../../assets/img/profile.png" alt="Foto de Perfil" class="profile-image" />
+    <h1>Franciele Fernandes</h1>
+    <h6>Desenvolvedora Web</h6>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="logo-linkedin" slot="start"></ion-icon>
+      <ion-label>LinkedIn</ion-label>
+      <ion-button fill="clear" slot="end" (click)="abrirLinkedIn()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="logo-github" slot="start"></ion-icon>
+      <ion-label>GitHub</ion-label>
+      <ion-button fill="clear" slot="end" (click)="abrirGitHub()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label>E-mail</ion-label>
+      <ion-button fill="clear" slot="end" (click)="enviarEmail()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="logo-instagram" slot="start"></ion-icon>
+      <ion-label>Instagram</ion-label>
+      <ion-button fill="clear" slot="end" (click)="abrirInstagram()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+
+      <ion-button fill="clear" slot="end" (click)="logout()">
+        <ion-label>Sair</ion-label>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

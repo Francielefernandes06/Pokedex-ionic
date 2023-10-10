@@ -10,7 +10,7 @@
   <h2>Pokémon ID: {{ pokemonId }}</h2>
 
   <ion-button id="present-alert"><ion-icon name="heart-outline"> </ion-icon> Favoritar</ion-button>
-  <ion-alert trigger="present-alert" header="Você realmente quer favoritar ess pokemon?" [buttons]="alertButtons" (didDismiss)="setResult($pokemonId)">
+  <ion-alert trigger="present-alert" header="Você realmente quer favoritar ess pokemon?" [buttons]="alertButtons" (didDismiss)="setResult($event)">
   </ion-alert>
   <div class="cartoes-pokemon">
     <div [ngClass]="getTipoClass(pokemonDetails.type)" class="cartao-pokemon aberto " id="cartao-pikachu">

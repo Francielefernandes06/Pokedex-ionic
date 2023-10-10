@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonDetailsService } from '../pokemon-details.service';
+import { Router } from '@angular/router'; // Importe o Router do Angular
+import { HttpClient } from '@angular/common/http';
+import { NavController } from '@ionic/angular';
+import { HttpHeaders } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-details-poke',
@@ -10,6 +16,14 @@ import { PokemonDetailsService } from '../pokemon-details.service';
 export class DetailsPokePage implements OnInit {
   pokemonDetails: any;
   pokemonId!: number;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private pokemonDetailsService: PokemonDetailsService,
+    private router: Router,
+    private http: HttpClient,
+    private navCtrl: NavController
+  ) { }
 
 
   public alertButtons = [
@@ -29,15 +43,58 @@ export class DetailsPokePage implements OnInit {
     },
   ];
 
-  setResult(ev:any) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
+  favoritarPokemon(pokemonId: number) {
+    // Aqui você pode fazer uma chamada ao backend para favoritar o Pokémon
+    // e depois redirecionar para a tela de listagem
+
+    // Exemplo de chamada ao backend (usando HttpClient, por exemplo)
+    const apiUrl = 'http://127.0.0.1:8000/api/favorites';
+    console.log(apiUrl)
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.error('Token de autenticação não encontrado no localStorage');
+      return; // Ou trate a ausência do token de acordo com a lógica do seu aplicativo
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}` // Substitua 'Bearer' pelo tipo de autenticação que sua API espera
+    });
+
+
+    // Faça a solicitação POST para a API
+    this.http.post(apiUrl,  { pokemon_id: pokemonId }, { headers }).subscribe(
+      (resposta: any) => {
+        if (resposta ) {
+
+
+          console.log(resposta);
+
+          this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
+        } else {
+          console.error('Requisição falhou. Mensagem de erro:', resposta.error);
+        }
+      },
+      (erro) => {
+        // Trate erros de solicitação, como problemas de rede
+        console.error('Erro ao fazer requisição:', erro);
+      }
+    );
+
+
+
+  }
+
+  setResult(ev: any) {
+    const role = ev.detail.role;
+    if (role === 'confirm') {
+      // Se o usuário confirmar, chame a função favoritarPokemon com o ID do Pokémon
+      this.favoritarPokemon(this.pokemonId);
+    }
   }
 
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private pokemonDetailsService: PokemonDetailsService
-  ) { }
+
 
   ngOnInit() {
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');

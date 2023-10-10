@@ -3,14 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then((m) => m.LoginModule),
@@ -23,6 +22,15 @@ const routes: Routes = [
     path: 'details-poke/:id',
     loadChildren: () => import('./details-poke/details-poke.module').then( m => m.DetailsPokePageModule)
   },
+  {
+    path: 'my-pokemons',
+    loadChildren: () => import('./my-pokemons/my-pokemons.module').then( m => m.MyPokemonsPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
 
 ];
 
