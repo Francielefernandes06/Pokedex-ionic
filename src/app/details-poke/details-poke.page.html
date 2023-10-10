@@ -8,6 +8,10 @@
 
 
   <h2>Pokémon ID: {{ pokemonId }}</h2>
+
+  <ion-button id="present-alert"><ion-icon name="heart-outline"> </ion-icon> Favoritar</ion-button>
+  <ion-alert trigger="present-alert" header="Você realmente quer favoritar ess pokemon?" [buttons]="alertButtons" (didDismiss)="setResult($pokemonId)">
+  </ion-alert>
   <div class="cartoes-pokemon">
     <div [ngClass]="getTipoClass(pokemonDetails.type)" class="cartao-pokemon aberto " id="cartao-pikachu">
 
@@ -26,7 +30,7 @@
         <div class="tipo">
           <span class="tipo1">
             <img [src]="getTipoImage(pokemonDetails.type)" alt="pokemon">
-            {{ pokemonDetails.type }}
+            {{ pokemonDetails.type.charAt(0).toUpperCase() + pokemonDetails.type.slice(1) }}
           </span>
         </div>
 
@@ -52,13 +56,13 @@
         <div class="habilidades">
           <h3>Habilidades</h3>
           <ul>
-            <li>{{ pokemonDetails.ability }}</li>
+            <li>{{ pokemonDetails.ability.charAt(0).toUpperCase() + pokemonDetails.ability.slice(1) }}</li>
 
           </ul>
         </div>
       </div>
       <div>
-        <button>Favortar</button>
+
       </div>
     </div>
 
