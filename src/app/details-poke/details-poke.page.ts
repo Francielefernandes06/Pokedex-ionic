@@ -196,6 +196,13 @@ export class DetailsPokePage implements OnInit {
         return 'tipo-lutador';
       case 'psychic':
         return 'tipo-psiquico';
+      case 'rock':
+        return 'tipo-pedra';
+      case 'ghost':
+        return 'tipo-fantasma';
+      case 'ice':
+        return 'tipo-gelo';
+      
       default:
         return 'tipo-eletrico';
     }

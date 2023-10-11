@@ -14,6 +14,10 @@ import { PokemonService } from '../pokemon.service';
 
 export class PokemonsPage implements OnInit {
   pokemons: any[] = [];
+  pokemonName: string = '';
+  pokemon: any;
+  errorMessage: string = '';
+
 
 
   constructor( private pokemonService: PokemonService,
@@ -25,6 +29,25 @@ export class PokemonsPage implements OnInit {
       this.pokemons = data;
       console.log(data);
     });
+  }
+
+  searchPokemon() {
+    if (this.pokemonName) {
+      const pokemonName = this.pokemonName.toLowerCase(); // Converte para minúsculas
+      this.pokemonService.getPokemonByName(pokemonName)
+        .subscribe(
+          (data) => {
+            this.pokemon = data;
+            this.errorMessage = '';
+          },
+          (error) => {
+            this.pokemon = null;
+            this.errorMessage = 'Pokémon não encontrado.';
+          }
+        );
+    } else {
+      this.errorMessage = 'Por favor, insira o nome do Pokémon.';
+    }
   }
 
   // onPokemonClick(pokemonId: number) {

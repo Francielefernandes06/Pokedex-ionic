@@ -5,16 +5,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="pokedex">
+  <ion-item>
+    <ion-input [(ngModel)]="pokemonName" placeholder="Nome do Pokémon"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="searchPokemon()">Pesquisar</ion-button>
   <nav class="listagem">
-    <!-- Verificar se a lista de Pokémons está vazia -->
+    <ul *ngIf="pokemon">
+      <li class="pokemon" *ngIf="pokemon" (click)="mostrarDetalhes(pokemon.id)">
+        <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="pokemon.name">
+        <span>{{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</span>
+      </li>
+    </ul>
+
+
     <div *ngIf="pokemons.length === 0" class="loading">
       Carregando...
     </div>
-    <!-- Exibir a lista de Pokémons se não estiver vazia -->
+
     <ul *ngIf="pokemons.length > 0">
+
       <li class="pokemon" *ngFor="let pokemon of pokemons" (click)="mostrarDetalhes(pokemon.id)">
         <img [src]="pokemon.image" [alt]="pokemon.name">
-        <span>{{ pokemon.name }}</span>
+        <span>{{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</span>
       </li>
     </ul>
   </nav>
