@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },
+  {
+    path: 'pokemon-details-user',
+    loadChildren: () => import('./pokemon-details-user/pokemon-details-user.module').then( m => m.PokemonDetailsUserPageModule)
+  },
 
 
 ];
