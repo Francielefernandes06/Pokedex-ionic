@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,16 @@ export class LoginComponent  implements OnInit {
   email: string = '';
   senha: string = '';
 
-  constructor(private http: HttpClient, private navCtrl: NavController) {}
+  constructor(private http: HttpClient, private navCtrl: NavController,  private toastController: ToastController) {}
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000, // Duração em milissegundos
+      position: 'bottom' // Posição do toast na tela
+    });
+    toast.present();
+  }
 
   login() {
     // Construa o objeto de dados para a solicitação POST
@@ -27,28 +38,28 @@ export class LoginComponent  implements OnInit {
     const apiUrl = 'http://127.0.0.1:8000/api/login';
     console.log(apiUrl)
 
-    // Faça a solicitação POST para a API
+
     this.http.post(apiUrl, dados).subscribe(
       (resposta: any) => {
-        // Verifique a resposta da API e tome ações com base nela
+
         if (resposta && resposta.access_token) {
-          // O login foi bem-sucedido, você pode armazenar o token de autenticação e redirecionar para outra página
-          // Exemplo de armazenamento de token em localStorage:
+
           localStorage.setItem('token', resposta.access_token);
 
-          localStorage.setItem('user', JSON.stringify(resposta.user)); // Armazene o objeto como uma string JSON
+          localStorage.setItem('user', JSON.stringify(resposta.user)); 
 
           console.log(resposta);
 
-          // Redirecione para a página desejada (por exemplo, a página inicial)
           this.navCtrl.navigateRoot('/');
         } else {
-          // O login falhou, exiba uma mensagem de erro para o usuário
+          this.presentToast('Email ou senha incorretos');
+
           console.error('Login falhou. Mensagem de erro:', resposta.error);
         }
       },
       (erro) => {
-        // Trate erros de solicitação, como problemas de rede
+        this.presentToast('Erro ao fazer login');
+
         console.error('Erro ao fazer login:', erro);
       }
     );

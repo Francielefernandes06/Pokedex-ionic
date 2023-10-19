@@ -5,6 +5,7 @@ import { Router } from '@angular/router'; // Importe o Router do Angular
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { HttpHeaders } from '@angular/common/http';
+import { UserService } from '../user.service';
 
 
 
@@ -17,12 +18,14 @@ export class DetailsPokePage implements OnInit {
   pokemonDetails: any;
   pokemonId!: number;
 
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private pokemonDetailsService: PokemonDetailsService,
     private router: Router,
     private http: HttpClient,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userService: UserService
   ) { }
 
 
@@ -44,39 +47,44 @@ export class DetailsPokePage implements OnInit {
   ];
 
   favoritarPokemon(pokemonId: number) {
-    // Aqui você pode fazer uma chamada ao backend para favoritar o Pokémon
-    // e depois redirecionar para a tela de listagem
 
-    // Exemplo de chamada ao backend (usando HttpClient, por exemplo)
     const apiUrl = 'http://127.0.0.1:8000/api/favorites';
     console.log(apiUrl)
     const token = localStorage.getItem('token');
 
     if (!token) {
       console.error('Token de autenticação não encontrado no localStorage');
-      return; // Ou trate a ausência do token de acordo com a lógica do seu aplicativo
+      return;
     }
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}` // Substitua 'Bearer' pelo tipo de autenticação que sua API espera
+      Authorization: `Bearer ${token}`
     });
 
 
-    // Faça a solicitação POST para a API
+
     this.http.post(apiUrl,  { pokemon_id: pokemonId }, { headers }).subscribe(
       (resposta: any) => {
         if (resposta ) {
 
+this.userService.getUserInfo().subscribe(
+  (userInfo) => {
+    localStorage.setItem('user', JSON.stringify(userInfo));
+    console.log('Informações do usuário:', userInfo);
 
-          console.log(resposta);
+    this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
+  },
+  (error) => {
+    console.error('Erro ao obter informações do usuário:', error);
 
-          this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
+    this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
+  }
+);
         } else {
           console.error('Requisição falhou. Mensagem de erro:', resposta.error);
         }
       },
       (erro) => {
-        // Trate erros de solicitação, como problemas de rede
         console.error('Erro ao fazer requisição:', erro);
       }
     );
@@ -88,7 +96,6 @@ export class DetailsPokePage implements OnInit {
   setResult(ev: any) {
     const role = ev.detail.role;
     if (role === 'confirm') {
-      // Se o usuário confirmar, chame a função favoritarPokemon com o ID do Pokémon
       this.favoritarPokemon(this.pokemonId);
     }
   }
@@ -100,7 +107,6 @@ export class DetailsPokePage implements OnInit {
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');
     if (idParam !== null) {
       this.pokemonId = +idParam;
-      // Chamar o serviço para buscar os detalhes do Pokémon com base no ID
       this.pokemonDetailsService.getPokemonDetailsById(this.pokemonId).subscribe((data: any) => {
         this.pokemonDetails = data.original;
         console.log(this.pokemonDetails);
@@ -112,8 +118,6 @@ export class DetailsPokePage implements OnInit {
   }
 
   getTipoImage(tipo: string): string {
-    // Aqui você pode fazer um mapeamento de tipos para URLs de imagem
-    // Por exemplo:
     if (tipo === 'water') {
       return '../../assets/img/agua.png';
     } else if (tipo === 'fire') {
@@ -174,7 +178,6 @@ export class DetailsPokePage implements OnInit {
   }
 
   getTipoClass(tipo: string): string {
-    // Mapeamento de tipos para classes CSS
     switch (tipo) {
       case 'water':
         return 'tipo-agua';
@@ -202,9 +205,13 @@ export class DetailsPokePage implements OnInit {
         return 'tipo-fantasma';
       case 'ice':
         return 'tipo-gelo';
-      
+
       default:
         return 'tipo-eletrico';
     }
+  }
+
+  returnPokemons() {
+    this.router.navigate(['/tabs/tab1']);
   }
 }

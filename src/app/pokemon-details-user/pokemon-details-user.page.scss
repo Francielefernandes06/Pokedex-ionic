@@ -1,0 +1,17 @@
+ion-header {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 20px;
+  display: flex;
+  margin-left: 15px;
+
+  span {
+    margin-left: 20px;
+  }
+
+  ion-icon {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,27 +1,33 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Detalhes do Pokémon
-    </ion-title>
-  </ion-toolbar>
+  <ion-icon (click)="returnPokemons()" name="arrow-back-circle-outline"></ion-icon>
+  <span>Detalhes pokemons</span>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row *ngIf="user.favorites.length > 0">
+    <ion-col size="12" *ngFor="let favorite of user.favorites">
+      <ion-card>
+        <img [src]="favorite.pokemon_info.original.photo" alt="{{ favorite.pokemon_info.original.name }}">
+        <ion-card-header>
+          <ion-card-title>
+            {{  favorite.pokemon_info.original.name.charAt(0).toUpperCase() +  favorite.pokemon_info.original.name.slice(1) }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{favorite.pokemon_info.original.type.charAt(0).toUpperCase() + favorite.pokemon_info.original.type.slice(1) }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
 
-<ion-content>
-  <ion-card *ngFor="let favorite of user.favorites">
-    <img [src]="favorite.pokemon_info.original.photo" alt="{{ favorite.pokemon_info.original.name }}">
-    <ion-card-header>
-
-      {{ favorite.pokemon_info.original.name }}
-    </ion-card-header>
-    <ion-card-content>
-      <p>Tipo: {{ favorite.pokemon_info.original.type }}</p>
-      <p>HP: {{ favorite.pokemon_info.original.hp }}</p>
-      <p>Ataque: {{ favorite.pokemon_info.original.attack }}</p>
-      <p>Defesa: {{ favorite.pokemon_info.original.defense }}</p>
-      <p>Ataque Especial: {{ favorite.pokemon_info.original.special_attack }}</p>
-      <p>Defesa Especial: {{ favorite.pokemon_info.original.special_defense }}</p>
-      <p>Velocidade: {{ favorite.pokemon_info.original.speed }}</p>
-      <p>Habilidade: {{ favorite.pokemon_info.original.ability }}</p>
-    </ion-card-content>
-  </ion-card>
+          <p><strong>HP:</strong> {{ favorite.pokemon_info.original.hp }}</p>
+          <p><strong>Ataque: </strong>{{ favorite.pokemon_info.original.attack }}</p>
+          <p><strong>Defesa:</strong> {{ favorite.pokemon_info.original.defense }}</p>
+          <p><strong>Ataque Especial:</strong> {{ favorite.pokemon_info.original.special_attack }}</p>
+          <p><strong>Defesa Especial: </strong>{{ favorite.pokemon_info.original.special_defense }}</p>
+          <p><strong>Velocidade:</strong> {{ favorite.pokemon_info.original.speed }}</p>
+          <p>
+            <strong>Habilidade:</strong> {{  favorite.pokemon_info.original.ability.charAt(0).toUpperCase() +  favorite.pokemon_info.original.ability.slice(1) }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-content>

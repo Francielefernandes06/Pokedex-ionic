@@ -28,4 +28,8 @@ export class PokemonDetailsUserPage implements OnInit {
   ngOnInit() {
   }
 
+  returnPokemons(){
+    this.router.navigate(['']);
+  }
+
 }

@@ -17,6 +17,8 @@ export class PokemonsPage implements OnInit {
   pokemonName: string = '';
   pokemon: any;
   errorMessage: string = '';
+  currentPage: number = 0;
+
 
 
 
@@ -25,11 +27,20 @@ export class PokemonsPage implements OnInit {
 
   ngOnInit() {
     // Fazer uma solicitação ao serviço para obter a lista de pokémons
-    this.pokemonService.getPokemons().subscribe((data: any[]) => {
+    this.pokemonService.getPokemons(this.currentPage).subscribe((data: any[]) => {
       this.pokemons = data;
       console.log(data);
     });
   }
+
+  getPokemons() {
+    this.pokemonService.getPokemons(this.currentPage)
+      .subscribe((data: any[]) => {
+        this.pokemons = data;
+        console.log(data);
+      });
+  }
+
 
   searchPokemon() {
     if (this.pokemonName) {
@@ -50,10 +61,25 @@ export class PokemonsPage implements OnInit {
     }
   }
 
+
+
   // onPokemonClick(pokemonId: number) {
   //   // Navegar para a página de detalhes do Pokémon com o ID como parâmetro
   //   this.navCtrl.navigateForward(`/pokemon-details/${pokemonId}`);
   // }
+
+  changePagination(direction: number) {
+    if (direction === 0) { // Anterior
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getPokemons();
+      }
+    } else if (direction === 1) { // Próximo
+      this.currentPage++;
+      this.getPokemons();
+    }
+  }
+
 
   mostrarDetalhes(pokemonId: number) {
     // Navegar para a página de detalhes do Pokémon e passar o ID como parâmetro
