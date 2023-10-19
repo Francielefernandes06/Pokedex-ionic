@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,14 +13,30 @@ export class PokemonService {
   private authToken = localStorage.getItem('token');
   constructor(private http: HttpClient) { }
 
-  getPokemons(): Observable<any[]> {
-    // Defina o cabeçalho da solicitação com o token de autenticação
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authToken}`
-    });
+  getPokemons(page: number): Observable<any[]> {
+    const apiPokeUrl = `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${page}`;
 
-    // Fazer uma solicitação GET para obter a lista de pokémons do backend com o cabeçalho de autenticação
-    return this.http.get<any[]>(`${this.apiUrl}/pokemons?page=1&per_page=5`, { headers });
+    return this.http.get<any[]>(apiPokeUrl).pipe(
+      map((response: any) => {
+        const pokemons = response.results.map((pokemon: any) => {
+          return {
+            id: this.getPokemonIdFromUrl(pokemon.url),
+            name: pokemon.name,
+            url: pokemon.url,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.getPokemonIdFromUrl(pokemon.url)}.png`
+          };
+        });
+        return pokemons;
+      })
+    );
+
+
+  }
+
+  getPokemonIdFromUrl(url: string): number {
+    // Extrai o ID do URL da PokeAPI
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2], 10);
   }
 
   getPokemonByName(name: string) {

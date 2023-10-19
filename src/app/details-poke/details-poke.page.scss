@@ -1,7 +1,22 @@
 *{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+  
+}
+ion-header {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 20px;
+  display: flex;
+  margin-left: 15px;
+
+  span {
+    margin-left: 20px;
+  }
+
+  ion-icon {
+    width: 30px;
+    height: 30px;
+  }
 }
 ion-content{
   background-color: #DADFE8;
@@ -17,17 +32,19 @@ ul {
   list-style-type: none;
 }
 .pokedex {
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   gap: 30px;
   padding: 30px 0;
 }
 
+
 .cartao-pokemon {
   height: 80vh;
-  display: none;
+
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
 }

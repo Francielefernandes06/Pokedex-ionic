@@ -60,3 +60,8 @@ ul {
 .listagem .pokemon.ativo{
   background-color: #BA68C8;
 }
+.paginacao {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 100px;
+}
