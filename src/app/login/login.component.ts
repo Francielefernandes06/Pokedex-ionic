@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 3000, // Duração em milissegundos
-      position: 'bottom' // Posição do toast na tela
+      duration: 3000,
+      position: 'bottom' 
     });
     toast.present();
   }
 
   login() {
-    // Construa o objeto de dados para a solicitação POST
+  
     const dados = {
       email: this.email,
       password: this.senha,
@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
     console.log(dados)
 
-    // Substitua a URL pela sua API de autenticação
     const apiUrl = 'http://127.0.0.1:8000/api/login';
     console.log(apiUrl)
 

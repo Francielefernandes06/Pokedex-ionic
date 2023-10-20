@@ -14,13 +14,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MyPokemonsPage implements OnInit {
 
-  meusPokemons: any[] = []; // Inicialize com o tipo de dados correto
+  meusPokemons: any[] = []; 
 
   constructor(private pokemonService: PokemonService, private modalController: ModalController, private userService: UserService, private http: HttpClient,) { }
 
   ngOnInit() {
     this.pokemonService.obterMeusPokemons().subscribe((data) => {
-      this.meusPokemons = data; // Supondo que o serviço retorna uma lista de Pokémon
+      this.meusPokemons = data; 
     });
   }
 

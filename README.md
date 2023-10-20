@@ -65,6 +65,21 @@ Para configurar e executar o projeto, siga as instruções no README.md dos dire
 - Melhorias na interface do usuário.
 - Introdução de eventos e desafios para ganhar mais pontuação.
 
+## Para Rodar o Projeto
+
+1- Preciso que siga os passos do README desse repositório abaixo
+- https://github.com/Francielefernandes06/PokedexApiIntegracao
+
+2- Rodou o back-end??
+
+Sim
+- Rode o comando npm install para instalar as dependências
+
+- Rode o comando ionic serve para rodar o projeto
+
+Não
+- Volte ao passo 1
+
 ---
 
 Este é um projeto em andamento e estamos sempre buscando melhorias e funcionalidades adicionais. Fique à vontade para contribuir e tornar o PokeScore ainda melhor!

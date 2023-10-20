@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
   async logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    //retorne para tela de lgin
+
     window.location.href = '/login';
   }
 

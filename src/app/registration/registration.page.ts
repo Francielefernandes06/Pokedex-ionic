@@ -34,9 +34,9 @@ export class RegistrationPage implements OnInit {
       password_confirmation: this.password_confirmation
     };
     if (userData.password !== userData.password_confirmation) {
-      // Senha e confirmação de senha não coincidem, exiba uma mensagem de erro
+    
       console.error('As senhas não coincidem');
-      // Você pode exibir uma mensagem de erro ao usuário aqui
+   
       return;
     }
     this.authService.registerUser(userData).subscribe(
@@ -57,7 +57,7 @@ export class RegistrationPage implements OnInit {
         }
       },
       error => {
-        // Lógica de tratamento de erro, exiba mensagens de erro ou feedback ao usuário
+ 
         console.error('Erro durante o registro', error);
       }
     );
