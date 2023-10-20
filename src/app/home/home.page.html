@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-list>
+      <ion-list >
         <ion-item>
           <ion-badge slot="end">{{ user.pontuation }} pontos</ion-badge>
           <ion-label>{{ user.name }}</ion-label>
@@ -24,12 +24,15 @@
     </ion-item>
     <ion-button expand="full" (click)="searchUsers()">Pesquisar</ion-button>
     <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchUsers()"></ion-searchbar> -->
-
-    <ion-list>
+    <ion-spinner *ngIf="loading"></ion-spinner>
+    <ion-list  *ngIf="users && users.length > 0">
       <ion-item *ngFor="let user of users" (click)="viewPokemonDetails(user)">
         {{ user.name }}- {{ user.email }}
       </ion-item>
     </ion-list>
+
+    <p class="error-message" *ngIf="!users || users.length === 0">{{ errorMessage }}</p>
+
 
     <!-- Botão "Próximo" -->
     <!-- <ion-button expand="full" (click)="irParaTelaLogin()">Próximo</ion-button> -->

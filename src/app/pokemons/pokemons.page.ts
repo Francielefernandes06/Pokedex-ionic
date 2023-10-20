@@ -16,8 +16,9 @@ export class PokemonsPage implements OnInit {
   pokemons: any[] = [];
   pokemonName: string = '';
   pokemon: any;
-  errorMessage: string = '';
+  
   currentPage: number = 0;
+  errorMessage: string | undefined;
 
 
 
@@ -62,15 +63,15 @@ export class PokemonsPage implements OnInit {
 
 
 
-  
+
 
   changePagination(direction: number) {
-    if (direction === 0) { 
+    if (direction === 0) {
       if (this.currentPage > 1) {
         this.currentPage--;
         this.getPokemons();
       }
-    } else if (direction === 1) { 
+    } else if (direction === 1) {
       this.currentPage++;
       this.getPokemons();
     }
@@ -78,7 +79,7 @@ export class PokemonsPage implements OnInit {
 
 
   mostrarDetalhes(pokemonId: number) {
-   
+
     this.navCtrl.navigateForward(`/details-poke/${pokemonId}` );
   }
 }

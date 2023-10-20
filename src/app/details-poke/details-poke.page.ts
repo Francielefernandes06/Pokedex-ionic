@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from '../user.service';
+import { Location } from '@angular/common';
+
 
 
 
@@ -25,7 +27,8 @@ export class DetailsPokePage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private navCtrl: NavController,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) { }
 
 
@@ -45,6 +48,7 @@ export class DetailsPokePage implements OnInit {
       },
     },
   ];
+
 
   favoritarPokemon(pokemonId: number) {
 
@@ -72,12 +76,17 @@ export class DetailsPokePage implements OnInit {
               localStorage.setItem('user', JSON.stringify(userInfo));
               console.log('Informações do usuário:', userInfo);
 
+
               this.navCtrl.navigateForward('/tabs/tab3', { state: { message: resposta.message } });
+
+
+              window.location.reload();
             },
             (error) => {
               console.error('Erro ao obter informações do usuário:', error);
 
               this.navCtrl.navigateForward('/tabs/tab3', { state: { message: resposta.message } });
+              window.location.reload();
             }
           );
         } else {
@@ -212,6 +221,7 @@ export class DetailsPokePage implements OnInit {
   }
 
   returnPokemons() {
-    this.navCtrl.navigateForward('');
+    this.navCtrl.navigateForward('tabs/tabs2');
+    window.location.reload();
   }
 }

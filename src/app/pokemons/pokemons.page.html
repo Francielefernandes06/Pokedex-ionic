@@ -9,6 +9,7 @@
     <ion-input [(ngModel)]="pokemonName" placeholder="Nome do Pokémon"></ion-input>
   </ion-item>
   <ion-button expand="full" (click)="searchPokemon()">Pesquisar</ion-button>
+  <p class="error-message" *ngIf="!pokemon">{{ errorMessage }}</p>
   <nav class="listagem">
     <ul *ngIf="pokemon">
       <li class="pokemon" *ngIf="pokemon" (click)="mostrarDetalhes(pokemon.id)">
