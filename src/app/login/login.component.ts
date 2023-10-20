@@ -9,24 +9,24 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent implements OnInit {
 
   email: string = '';
   senha: string = '';
 
-  constructor(private http: HttpClient, private navCtrl: NavController,  private toastController: ToastController) {}
+  constructor(private http: HttpClient, private navCtrl: NavController, private toastController: ToastController) { }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 3000, // Duração em milissegundos
-      position: 'bottom' // Posição do toast na tela
+      duration: 3000,
+      position: 'bottom' 
     });
     toast.present();
   }
 
   login() {
-    // Construa o objeto de dados para a solicitação POST
+  
     const dados = {
       email: this.email,
       password: this.senha,
@@ -34,7 +34,6 @@ export class LoginComponent  implements OnInit {
 
     console.log(dados)
 
-    // Substitua a URL pela sua API de autenticação
     const apiUrl = 'http://127.0.0.1:8000/api/login';
     console.log(apiUrl)
 
@@ -46,7 +45,7 @@ export class LoginComponent  implements OnInit {
 
           localStorage.setItem('token', resposta.access_token);
 
-          localStorage.setItem('user', JSON.stringify(resposta.user)); 
+          localStorage.setItem('user', JSON.stringify(resposta.user));
 
           console.log(resposta);
 
@@ -65,6 +64,11 @@ export class LoginComponent  implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  goToRegistration() {
+    
+    this.navCtrl.navigateForward('/registration'); 
+  }
+
+  ngOnInit() { }
 
 }

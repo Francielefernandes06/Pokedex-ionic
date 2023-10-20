@@ -26,7 +26,7 @@ export class HomePage {
 
   searchUsers() {
 
-    const token = localStorage.getItem('token'); // Substitua pelo seu token de autenticação
+    const token = localStorage.getItem('token'); 
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -40,7 +40,6 @@ export class HomePage {
     console.log('Dados do usuário:', user);
 
 
-  // Navegue para a página de detalhes e passe o usuário como parâmetro em JSON
   this.navCtrl.navigateForward('/pokemon-details-user', { state: { user } });
   }
 

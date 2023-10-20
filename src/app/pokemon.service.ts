@@ -52,4 +52,6 @@ export class PokemonService {
     return this.http.get<any[]>(`${this.apiUrl}/my-favorites`, { headers });
   }
 
+
+
 }

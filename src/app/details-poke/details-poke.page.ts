@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonDetailsService } from '../pokemon-details.service';
-import { Router } from '@angular/router'; // Importe o Router do Angular
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { HttpHeaders } from '@angular/common/http';
@@ -63,23 +63,23 @@ export class DetailsPokePage implements OnInit {
 
 
 
-    this.http.post(apiUrl,  { pokemon_id: pokemonId }, { headers }).subscribe(
+    this.http.post(apiUrl, { pokemon_id: pokemonId }, { headers }).subscribe(
       (resposta: any) => {
-        if (resposta ) {
+        if (resposta) {
 
-this.userService.getUserInfo().subscribe(
-  (userInfo) => {
-    localStorage.setItem('user', JSON.stringify(userInfo));
-    console.log('Informações do usuário:', userInfo);
+          this.userService.getUserInfo().subscribe(
+            (userInfo) => {
+              localStorage.setItem('user', JSON.stringify(userInfo));
+              console.log('Informações do usuário:', userInfo);
 
-    this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
-  },
-  (error) => {
-    console.error('Erro ao obter informações do usuário:', error);
+              this.navCtrl.navigateForward('/tabs/tab3', { state: { message: resposta.message } });
+            },
+            (error) => {
+              console.error('Erro ao obter informações do usuário:', error);
 
-    this.router.navigate(['/tabs/tab3'], { state: { message: resposta.message } });
-  }
-);
+              this.navCtrl.navigateForward('/tabs/tab3', { state: { message: resposta.message } });
+            }
+          );
         } else {
           console.error('Requisição falhou. Mensagem de erro:', resposta.error);
         }
@@ -212,6 +212,6 @@ this.userService.getUserInfo().subscribe(
   }
 
   returnPokemons() {
-    this.router.navigate(['/tabs/tab1']);
+    this.navCtrl.navigateForward('');
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -8,28 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./pokemon-details-user.page.scss'],
 })
 export class PokemonDetailsUserPage implements OnInit {
-  user: any; // Declare a variável para armazenar os favoritos
-
-  constructor(private router: Router) {
+  user: any; 
+  constructor(private router: Router, private navCtrl: NavController) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state){
       this.user = navigation.extras.state['user'];
       console.log('Dados do usuário na outra página:', this.user);
     }
-    // if (favoritesString) {
-    //   try {
-    //     this.favorites = JSON.parse(favoritesString);
-    //   } catch (error) {
-    //     console.error('Erro ao analisar dados de favoritos: ', error);
-    //   }
-    // }
+    
   }
 
   ngOnInit() {
   }
 
   returnPokemons(){
-    this.router.navigate(['']);
+    this.navCtrl.navigateForward('');
   }
 
 }
