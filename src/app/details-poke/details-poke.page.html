@@ -1,6 +1,6 @@
 <ion-header>
   <ion-icon (click)="returnPokemons()" name="arrow-back-circle-outline"></ion-icon>
-  <span>{{ pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1) }}</span>
+  <span>{{ pokemonDetails?.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1) }}</span>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -14,7 +14,7 @@
       (didDismiss)="setResult($event)">
     </ion-alert>
     <div class="cartoes-pokemon">
-      <div [ngClass]="getTipoClass(pokemonDetails.type)" class="cartao-pokemon aberto " id="cartao-pikachu">
+      <div [ngClass]="getTipoClass(pokemonDetails?.type)" class="cartao-pokemon aberto " id="cartao-pikachu">
 
 
 

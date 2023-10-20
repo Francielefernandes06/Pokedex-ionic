@@ -221,7 +221,7 @@ export class DetailsPokePage implements OnInit {
   }
 
   returnPokemons() {
-    this.navCtrl.navigateForward('tabs/tabs2');
-    window.location.reload();
+    this.navCtrl.back();
+    
   }
 }
