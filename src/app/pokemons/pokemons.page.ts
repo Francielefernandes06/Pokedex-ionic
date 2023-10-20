@@ -23,7 +23,7 @@ export class PokemonsPage implements OnInit {
 
 
   constructor( private pokemonService: PokemonService,
-    private router: Router) { }
+    private router: Router,  private navCtrl: NavController) { }
 
   ngOnInit() {
     // Fazer uma solicitação ao serviço para obter a lista de pokémons
@@ -83,6 +83,6 @@ export class PokemonsPage implements OnInit {
 
   mostrarDetalhes(pokemonId: number) {
     // Navegar para a página de detalhes do Pokémon e passar o ID como parâmetro
-    this.router.navigate(['/details-poke', pokemonId]);
+    this.navCtrl.navigateForward(`/details-poke/${pokemonId}` );
   }
 }
