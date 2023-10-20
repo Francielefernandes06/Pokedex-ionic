@@ -9,12 +9,12 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent implements OnInit {
 
   email: string = '';
   senha: string = '';
 
-  constructor(private http: HttpClient, private navCtrl: NavController,  private toastController: ToastController) {}
+  constructor(private http: HttpClient, private navCtrl: NavController, private toastController: ToastController) { }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -46,7 +46,7 @@ export class LoginComponent  implements OnInit {
 
           localStorage.setItem('token', resposta.access_token);
 
-          localStorage.setItem('user', JSON.stringify(resposta.user)); 
+          localStorage.setItem('user', JSON.stringify(resposta.user));
 
           console.log(resposta);
 
@@ -65,6 +65,11 @@ export class LoginComponent  implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  goToRegistration() {
+    
+    this.navCtrl.navigateForward('/registration'); 
+  }
+
+  ngOnInit() { }
 
 }

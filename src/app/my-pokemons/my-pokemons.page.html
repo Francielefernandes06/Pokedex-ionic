@@ -20,6 +20,13 @@
         <ion-card-content>
           {{ pokemon.ability.charAt(0).toUpperCase() + pokemon.ability.slice(1) }}
         </ion-card-content>
+        <ion-button [id]="pokemon.id">Remover Pokémon</ion-button>
+
+        <ion-alert [trigger]="pokemon.id" header="Você realmente quer excluir esse pokemon? Você terá 50% do pontos de volta" [buttons]="alertButtons"
+          (didDismiss)="setResult($event, pokemon.id)">
+        </ion-alert>
+
+
       </ion-card>
     </ion-col>
 

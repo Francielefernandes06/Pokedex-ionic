@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonDetailsService } from '../pokemon-details.service';
-import { Router } from '@angular/router'; // Importe o Router do Angular
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { HttpHeaders } from '@angular/common/http';
@@ -212,6 +212,6 @@ this.userService.getUserInfo().subscribe(
   }
 
   returnPokemons() {
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['']);
   }
 }
