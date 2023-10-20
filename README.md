@@ -71,13 +71,28 @@ Para configurar e executar o projeto, siga as instruções no README.md dos dire
 - https://github.com/Francielefernandes06/PokedexApiIntegracao
 
 2- Rodou o back-end??
-
+<hr>
 Sim
+
+- Clone este repositório
+- Acesse a pasta
 - Rode o comando npm install para instalar as dependências
-
 - Rode o comando ionic serve para rodar o projeto
+- Abixo tem alguns usuários salvos no backend
 
+`email: exemplo@usuario.com`
+
+`senha: senha123`
+
+ou
+
+`email: outro@usuario.com`
+
+`senha: outrasenha`
+
+<hr>
 Não
+
 - Volte ao passo 1
 
 ---
